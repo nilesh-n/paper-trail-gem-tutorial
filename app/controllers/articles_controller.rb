@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy,
-                                     :versions, :version]
+                                     :versions, :version, :revert]
 
   # GET /articles
   # GET /articles.json
@@ -71,6 +71,21 @@ class ArticlesController < ApplicationController
       id: params[:version_id],
       item_id: @article
     )
+  end
+
+  def revert
+    @version = PaperTrail::Version.find_by(
+      id: params[:version_id],
+      item_id: @article
+    )
+
+    @reverted_article = @version.reify
+
+    if @reverted_article.save
+      redirect_to @article, notice: 'Article was successfully reverted.'
+    else
+      render :version
+    end
   end
 
   private
