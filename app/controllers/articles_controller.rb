@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :versions]
+  before_action :set_article, only: [:show, :edit, :update, :destroy,
+                                     :versions, :version]
 
   # GET /articles
   # GET /articles.json
@@ -63,6 +64,13 @@ class ArticlesController < ApplicationController
 
   def versions
     @articles = @article.versions
+  end
+
+  def version
+    @version = PaperTrail::Version.find_by(
+      id: params[:version_id],
+      item_id: @article
+    )
   end
 
   private
