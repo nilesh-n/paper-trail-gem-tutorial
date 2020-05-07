@@ -81,7 +81,16 @@ class ArticlesController < ApplicationController
   end
 
   def deleted
-    @articles = PaperTrail::Version.where(item_type: 'Article', event: 'destroy').order(created_at: :desc)
+    destroyed_articles = PaperTrail::Version
+      .where(item_type: 'Article', event: 'destroy')
+      .order(created_at: :desc)
+
+    latest_destroyed_articles = destroyed_articles
+      .select { |v| v.reify.versions.last.event == 'destroy' }
+      .map(&:reify)
+      .uniq(&:id)
+
+    @articles = latest_destroyed_articles
   end
 
   private
