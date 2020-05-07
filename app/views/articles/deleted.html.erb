@@ -12,13 +12,7 @@
   </thead>
 
   <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.try(:reify) ? article.reify.title : article.title %></td>
-        <td><%= article.try(:reify) ? article.reify.body : article.body %></td>
-        <td><%= link_to 'Restore this article', restore_article_path(article), method: :post %></td>
-      </tr>
-    <% end %>
+    <%= render partial: 'article', collection: @articles %>
   </tbody>
 </table>
 
