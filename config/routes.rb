@@ -13,4 +13,6 @@ Rails.application.routes.draw do
       get 'deleted', to: 'articles#deleted'
     end
   end
+
+  resources :comments
 end
