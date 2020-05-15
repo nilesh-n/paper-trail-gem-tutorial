@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # custom gems
 gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 gem 'faker'
 
 group :development, :test do
