@@ -25,3 +25,7 @@ restored_article = Article.create(title: 'A previously deleted article', body: F
 restored_article.destroy
 restored_article = Article.new(id: restored_article.id).versions.last.reify
 restored_article.save
+
+a = Article.create(title: 'foo', body: Faker::Lorem.paragraph)
+a.comments.create(body: 'comment 1')
+a.comments.create(body: 'comment 2')
