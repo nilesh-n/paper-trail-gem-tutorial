@@ -27,5 +27,10 @@ restored_article = Article.new(id: restored_article.id).versions.last.reify
 restored_article.save
 
 a = Article.create(title: 'foo', body: Faker::Lorem.paragraph)
-a.comments.create(body: 'comment 1')
-a.comments.create(body: 'comment 2')
+comment_1 = a.comments.create(body: 'comment 1')
+comment_2 = a.comments.create(body: 'comment 2')
+
+comment_1.notes.create(body: 'comment 1 - note 1')
+comment_1.notes.create(body: 'comment 1 - note 2')
+
+comment_2.notes.create(body: 'comment 2 - note 1')
