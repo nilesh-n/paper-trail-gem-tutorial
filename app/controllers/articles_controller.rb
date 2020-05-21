@@ -95,9 +95,11 @@ class ArticlesController < ApplicationController
 
   def restore
     latest_version = Article.new(id: params[:id]).versions.last
+    # latest_version = PaperTrail::Version.where(item_type: 'Article', item_id: params[:id]).last
     if latest_version.event == 'destroy'
       @article = latest_version.reify
       if @article.save
+        latest_version.reify(has_many: true).save
         redirect_to @article, notice: 'Article was successfully restored.'
       else
         render :deleted
