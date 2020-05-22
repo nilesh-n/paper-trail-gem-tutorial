@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :notes
+  resources :note_images
 end

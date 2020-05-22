@@ -1,0 +1,22 @@
+<%= form_with(model: note_image, local: true) do |form| %>
+  <% if note_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(note_image.errors.count, "error") %> prohibited this note_image from being saved:</h2>
+
+      <ul>
+        <% note_image.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :note_id %>
+    <%= form.text_field :note_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

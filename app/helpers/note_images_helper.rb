@@ -1,0 +1,2 @@
+module NoteImagesHelper
+end
