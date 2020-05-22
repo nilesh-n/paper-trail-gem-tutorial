@@ -5,5 +5,13 @@
   <%= @note_image.note_id %>
 </p>
 
+<% if @note_image.image.attached? %>
+  <p>
+    <strong>Image:</strong>
+    <br>
+    <%= image_tag @note_image.image %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_note_image_path(@note_image) %> |
 <%= link_to 'Back', note_images_path %>

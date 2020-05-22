@@ -69,6 +69,6 @@ class NoteImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_image_params
-      params.require(:note_image).permit(:note_id)
+      params.require(:note_image).permit(:note_id, :image)
     end
 end
