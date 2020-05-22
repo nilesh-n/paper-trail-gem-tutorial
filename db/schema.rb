@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_05_22_140352) do
   end
 
   create_table "note_images", force: :cascade do |t|
-    t.bigint "note_id", null: false
+    t.bigint "note_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["note_id"], name: "index_note_images_on_note_id"
