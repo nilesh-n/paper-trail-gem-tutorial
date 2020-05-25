@@ -94,18 +94,10 @@ class ArticlesController < ApplicationController
   end
 
   def restore
-    latest_version = Article.new(id: params[:id]).versions.last
-    # latest_version = PaperTrail::Version.where(item_type: 'Article', item_id: params[:id]).last
-    if latest_version.event == 'destroy'
-      @article = latest_version.reify
-      if @article.save
-        previous = latest_version.reify(has_many: true)
-        previous.comments.each { |c| restore_association(c, latest_version.transaction_id) }
-        previous.notes.each { |n| restore_association(n, latest_version.transaction_id) }
-        redirect_to @article, notice: 'Article was successfully restored.'
-      else
-        render :deleted
-      end
+    if @article = Article.restore(params[:id])
+      redirect_to @article, notice: 'Article was successfully restored.'
+    else
+      render :deleted
     end
   end
 
@@ -120,10 +112,6 @@ class ArticlesController < ApplicationController
         id: params[:version_id],
         item_id: @article
       )
-    end
-
-    def restore_association(association, transaction_id)
-      association.versions.where(transaction_id: transaction_id).last.reify.save
     end
 
     # Only allow a list of trusted parameters through.
