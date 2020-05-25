@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2020_05_22_140352) do
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object"
+    t.jsonb "object"
     t.datetime "created_at"
-    t.text "object_changes"
+    t.jsonb "object_changes"
     t.integer "transaction_id"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
